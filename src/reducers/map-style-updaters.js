@@ -44,6 +44,10 @@ const getDefaultState = () => {
   const styleType = 'dark';
   const topLayerGroups = {};
 
+  console.log(111122, DEFAULT_MAP_STYLES.reduce((accu, curr) => ({
+    ...accu,
+    [curr.id]: curr
+  }), {}))
   return {
     styleType,
     visibleLayerGroups,

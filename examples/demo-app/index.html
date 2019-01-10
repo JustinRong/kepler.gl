@@ -5,11 +5,85 @@
     <title>kepler.gl demo</title>
     <link href="//d1a3f4spazzrp4.cloudfront.net/uber-fonts/4.0.0/superfine.css" rel="stylesheet">
     <link href="//api.tiles.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
     <style type="text/css">
        body {margin: 0; padding: 0; overflow: hidden;}
     </style>
+    <style>
+      .map {
+        /* height: 400px; */
+        width: 100%;
+      }
+    </style>
+    <!-- <script src="https://cdn.bootcss.com/openlayers/4.6.5/ol.js"></script> -->
   </head>
   <body>
     <script src="/bundle.js"></script>
+    <div id="OlMap" class="map">
+    </div>
+    <!-- <script>
+    var MMap= ol.Map
+    var View = ol.View
+    var TileLayer = ol.layer.Tile
+    var LayerGroup = ol.layer.Group
+    var fromLonLat = ol.proj.fromLonLat
+    const {TileJSON,OSM} = ol.source
+    var x=116.397428, y=39.90923
+    var map = new MMap({
+        layers: [
+          new TileLayer({
+            source: new OSM()
+          }), new LayerGroup({
+            layers: [
+              new TileLayer({
+                source: new TileJSON({
+                  url: 'https://api.tiles.mapbox.com/v3/mapbox.20110804-hoa-foodinsecurity-3month.json?secure',
+                  crossOrigin: 'anonymous'
+                })
+              }),
+              new TileLayer({
+                source: new TileJSON({
+                  url: 'https://api.tiles.mapbox.com/v3/mapbox.world-borders-light.json?secure',
+                  crossOrigin: 'anonymous'
+                })
+              })
+            ]
+          })
+        ],
+        target: 'OlMap',
+        view: new View({
+          center: fromLonLat([x,y]),
+          zoom: 11,
+          maxZoom: 22
+        })
+      });
+
+
+      function bindInputs(layerid, layer) {
+        var visibilityInput = $(layerid + ' input.visible');
+        visibilityInput.on('change', function() {
+          layer.setVisible(this.checked);
+        });
+        visibilityInput.prop('checked', layer.getVisible());
+
+        var opacityInput = $(layerid + ' input.opacity');
+        opacityInput.on('input change', function() {
+          layer.setOpacity(parseFloat(this.value));
+        });
+        opacityInput.val(String(layer.getOpacity()));
+      }
+      map.getLayers().forEach(function(layer, i) {
+        bindInputs('#layer' + i, layer);
+        if (layer instanceof LayerGroup) {
+          layer.getLayers().forEach(function(sublayer, j) {
+            bindInputs('#layer' + i + j, sublayer);
+          });
+        }
+      });
+
+      $('#layertree li > span').click(function() {
+        $(this).siblings('fieldset').toggle();
+      }).siblings('fieldset').hide();
+    </script> -->
   </body>
 </html>

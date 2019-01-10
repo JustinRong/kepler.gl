@@ -292,7 +292,6 @@ class App extends Component {
           </div>
         </GlobalStyle>
       </ThemeProvider>
-
     );
   }
 }

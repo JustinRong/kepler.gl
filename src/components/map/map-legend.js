@@ -97,7 +97,7 @@ const SingleColorLegend = ({layer, width}) => (
 
 const MultiColorLegend = ({layer, width}) => {
   const {visConfig, colorField, colorScale, colorDomain} = layer.config;
-
+  console.log('world hello')
   return (
     <ColorLegend
       scaleType={colorScale}

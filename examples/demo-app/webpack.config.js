@@ -36,7 +36,8 @@ const CONFIG = {
 
   resolve: {
     // Make src files outside of this dir resolve modules in our node_modules folder
-    modules: [resolve(__dirname, '.'), resolve(__dirname, 'node_modules'), 'node_modules']
+    modules: [resolve(__dirname, '.'), resolve(__dirname, 'node_modules'), 'node_modules'],
+    
   },
 
   module: {
@@ -63,6 +64,13 @@ const CONFIG = {
   // to support browser history api and remove the '#' sign
   devServer: {
     historyApiFallback: true,
+    proxy: {
+      '/panorama/': {
+        target:'http://192.168.31.226/',
+        changeOrigin: true,
+        secure: false
+      }
+  }
   },
 
   // Optional: Enables reading mapbox token from environment variable
@@ -70,7 +78,7 @@ const CONFIG = {
     new webpack.EnvironmentPlugin(['MapboxAccessToken', 'DropboxClientId'])
   ]
 };
-
+console.log(CONFIG)
 // This line enables bundling against src in this repo rather than installed deck.gl module
 module.exports = env => {
   return env ? require('../webpack.config.local')(CONFIG, __dirname)(env) : CONFIG;

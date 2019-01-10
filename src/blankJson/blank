@@ -1,0 +1,33 @@
+{
+    "version": 8,
+    "name": "Blank",
+    "metadata": {
+        "mapbox:autocomposite": true,
+        "mapbox:type": "template",
+        "mapbox:sdk-support": {
+            "js": "0.50.0",
+            "android": "6.7.0",
+            "ios": "4.6.0"
+        }
+    },
+    "center": [0, 0],
+    "zoom": 0.31741259330687854,
+    "bearing": 0,
+    "pitch": 0,
+    "sources": {},
+    "sprite": "/panorama/kepler.gl/map-styles/blanksprite",
+    "glyphs": "/panorama/kepler.gl/map-styles/font/{fontstack}/{range}.pbf",
+    "layers": [
+        {
+            "id": "background",
+            "type": "background",
+            "paint": {"background-color": "rgba(0,0,0,0)"}
+        }
+    ],
+    "created": "2019-01-07T09:06:27.925Z",
+    "id": "cjqm3qgn7ecc42rmw0tw3gqx6",
+    "modified": "2019-01-10T07:06:01.541Z",
+    "owner": "justinfeng",
+    "visibility": "public",
+    "draft": false
+}

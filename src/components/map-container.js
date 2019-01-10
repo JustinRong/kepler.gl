@@ -41,16 +41,34 @@ import {transformRequest} from 'utils/map-style-utils/mapbox-utils';
 // default-settings
 import {LAYER_BLENDINGS} from 'constants/default-settings';
 import ThreeDBuildingLayer from '../deckgl-layers/3d-building-layer/3d-building-layer';
+import { isAbsolute } from 'path';
+import {
+  interaction, source,layer,Feature,geom, custom, control, //name spaces
+  Interactions, Overlays, Controls,     //group
+  Map, Layers, View,Overlay, Util    //objects
+} from "react-openlayers";
+import * as ol from 'openlayers';
+import { Layer } from 'layers';
+
+import OLMap from './ol/OLMap'
+
 
 const MAP_STYLE = {
   container: {
     display: 'inline-block',
-    position: 'relative'
+    position: 'relative',
+    opacity:  0.2,
   },
   top: {
     position: 'absolute', top: '0px', pointerEvents: 'none'
+  },
+  ol: {
+    width: '100vw', height: '100vh', zIndex: '-1',
+    position: 'absolute',left: '0px',top:'0px',
   }
 };
+
+
 
 const getGlConst = d => GL[d];
 
@@ -405,8 +423,22 @@ export default function MapContainerFactory(MapPopover, MapControl) {
         onViewportChange: updateMap,
         transformRequest
       };
-
+      
+      console.log('world hello2', mapProps)
       return (
+        <div>
+          <OLMap {...mapProps} />
+          {/* <div style={MAP_STYLE.ol}>
+          <Map view={{center: ol.proj.fromLonLat([116.397428, 39.90923]), maxZoom: 22, zoom: 11 }}>
+          <Layers>
+            <layer.Tile source={source2}/>
+            <Layers>
+              <layer.Tile source={source3}/>
+              <layer.Tile source={source4}/>
+            </Layers>
+          </Layers>
+        </Map>
+          </div> */}
         <StyledMapContainer style={MAP_STYLE.container} onMouseMove={this._onMouseMove}>
           <MapControl
             datasets={datasets}
@@ -424,7 +456,7 @@ export default function MapContainerFactory(MapPopover, MapControl) {
             onMapToggleLayer={this._handleMapToggleLayer}
             onToggleFullScreen={mapStateActions.toggleFullScreen}
             onToggleMapControl={toggleMapControl}
-          />
+            />
           <MapComponent
             {...mapProps}
             key="bottom"
@@ -432,7 +464,7 @@ export default function MapContainerFactory(MapPopover, MapControl) {
             mapStyle={mapStyle.bottomMapStyle}
             onClick={onMapClick}
             getCursor={this.props.hoverInfo ? () => 'pointer' : undefined}
-          >
+            >
             {this._renderOverlay()}
             {this._renderMapboxOverlays()}
           </MapComponent>
@@ -442,11 +474,12 @@ export default function MapContainerFactory(MapPopover, MapControl) {
                 {...mapProps}
                 key="top"
                 mapStyle={mapStyle.topMapStyle}
-              />
+                />
             </div>
           )}
           {this._renderObjectLayerPopover()}
         </StyledMapContainer>
+          </div>
       );
     }
   }
